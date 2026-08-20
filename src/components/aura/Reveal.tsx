@@ -8,8 +8,8 @@ export function useReveal<T extends HTMLElement>(delay = 0) {
     const el = ref.current;
     if (!el) return;
     const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
+      (entries) => {
+        if (entries.some((e) => e.isIntersecting)) {
           window.setTimeout(() => setVisible(true), delay);
           observer.disconnect();
         }
